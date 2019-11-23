@@ -1,11 +1,9 @@
 #pragma once
 #include <string>
-//#include <map>
 #include "stack2.h"
 
 class infix2postfix
 {
-	//const std::map<char, short> operators_priority = { {'(', 0}, {'+', 1}, {'-', 1}, {'*', 2}, {'/', 2}, {'^', 3} };
 	Stack<char> operators;
 
 	std::string& infix;
