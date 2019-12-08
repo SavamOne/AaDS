@@ -5,11 +5,17 @@ namespace Lab3
 {
 
     //Реализация AVL-дерева, наследуется от класса бинарого дерева поиска
-    class AVL_Tree<TKey, TValue> : BS_Tree<TKey, TValue> where TKey : IComparable<TKey>
+    public class AVL_Tree<TKey, TValue> : BS_Tree<TKey, TValue> where TKey : IComparable<TKey>
     {
-        
+
         //Баланс - разница в высотах левого сына и правого сына
-        private int Balance(Node subtree) => (subtree.Left?.Height ?? -1) - (subtree.Right?.Height ?? -1);
+        private int Balance(Node subtree)
+        {
+            if (subtree == null)
+                return -1;
+            return (subtree.Left?.Height ?? -1) - (subtree.Right?.Height ?? -1);
+        }
+        
 
 
         //Метод для балансировки дерева
@@ -17,17 +23,17 @@ namespace Lab3
         {
             Debug.WriteLine("Баланс");
 
-            Node newNode = null;
+            Node newNode = node;
 
             int balance = Balance(node);
 
             if (balance > 1 && Balance(node.Left) > 0) //Если баланс 2 и баланс левого сына положителен, то делать правый поворот
                newNode = RRotate(node);
-            else if (balance > 1 && Balance(node.Left) < 0)  //Если баланс 2 и баланс левого сына отрицателен, то делать лево-правый поворот
+            else if (balance > 1 && Balance(node.Left) <= 0)  //Если баланс 2 и баланс левого сына отрицателен, то делать лево-правый поворот
                 newNode = LRRotate(node);
             else if (balance < -1 && Balance(node.Right) < 0) //Если баланс -2 и баланс правого сына отрицателен, то делать левый поворот
                 newNode = LRotate(node);
-            else if (balance < -1 && Balance(node.Right) > 0) //Если баланс -2 и баланс левого сына положителен, то делать право-левый поворот
+            else if (balance < -1 && Balance(node.Right) >= 0) //Если баланс -2 и баланс левого сына положителен, то делать право-левый поворот
                 newNode = RLRotate(node);
             
 

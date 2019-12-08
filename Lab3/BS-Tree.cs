@@ -4,7 +4,7 @@ namespace Lab3
 {
 
     //Реализация бинарного дерева поиска, наследуется от базового класса дерева
-    class BS_Tree<TKey, TValue> : Tree<TKey, TValue> where TKey : IComparable<TKey>
+    public class BS_Tree<TKey, TValue> : Tree<TKey, TValue> where TKey : IComparable<TKey>
     {
 
         //Добавление узла - если узлов нет, то он будет являться корнем, если есть, то проход в нужном порядке по всем сыновьям и добавление к нему левого или правого сына
@@ -67,7 +67,7 @@ namespace Lab3
         }
 
 
-        //Значение по ключу - Поиск узла по ключу и возврат значения
+        //Значение по ключу - Поиск узла по ключу и возврат/замена значения
         public override TValue this[TKey key]
         {
             get
@@ -76,6 +76,14 @@ namespace Lab3
                 if (x != null)
                     return x.Value;
                 throw new Exception("Такой ключ не существует");
+            }
+            set
+            {
+                Node x = Find(key);
+                if (x != null)
+                    x.Value = value;
+                else
+                    throw new Exception("Такой ключ не существует");
             }
         }
            
