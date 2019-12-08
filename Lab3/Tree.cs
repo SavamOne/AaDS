@@ -5,7 +5,7 @@
 //Содержит объявления основных методов и полей, реализацию методов для вывода дерева, реализацию класса узла дерева
 namespace Lab3
 {
-    abstract class Tree<TKey, TValue> where TKey: IComparable<TKey>
+    public abstract class Tree<TKey, TValue> where TKey: IComparable<TKey>
     {
 
         //Основной класс для узла дерева
@@ -51,6 +51,7 @@ namespace Lab3
         public abstract TValue this[TKey key]
         {
             get;
+            set;
         }
 
 
